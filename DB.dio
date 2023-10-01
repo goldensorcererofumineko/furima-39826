@@ -1,6 +1,6 @@
 <mxfile host="65bd71144e">
     <diagram id="ABVSGHIWmNhb62gvKODj" name="ページ1">
-        <mxGraphModel dx="1051" dy="924" grid="0" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1169" pageHeight="1654" background="#ffffff" math="0" shadow="0">
+        <mxGraphModel dx="1697" dy="924" grid="0" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1169" pageHeight="1654" background="#ffffff" math="0" shadow="0">
             <root>
                 <mxCell id="0"/>
                 <mxCell id="1" parent="0"/>
@@ -67,7 +67,7 @@
                 <mxCell id="20" value="adrresses" style="swimlane;fontStyle=0;childLayout=stackLayout;horizontal=1;startSize=26;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;align=center;fontSize=14;strokeColor=#040101;" vertex="1" parent="1">
                     <mxGeometry x="187" y="800" width="357" height="236" as="geometry"/>
                 </mxCell>
-                <mxCell id="21" value="postal-code(string型、not null、-含める、max8)" style="text;strokeColor=none;fillColor=none;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontSize=12;fontColor=#090707;" vertex="1" parent="20">
+                <mxCell id="21" value="postal_code(string型、not null、-含める、max8)" style="text;strokeColor=none;fillColor=none;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontSize=12;fontColor=#090707;" vertex="1" parent="20">
                     <mxGeometry y="26" width="357" height="30" as="geometry"/>
                 </mxCell>
                 <mxCell id="22" value="prefecture_id(integer型、not null)" style="text;strokeColor=none;fillColor=none;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontSize=12;fontColor=#0a0a0a;" vertex="1" parent="20">
@@ -82,7 +82,7 @@
                 <mxCell id="25" value="building(string型)" style="text;strokeColor=none;fillColor=none;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontSize=12;fontColor=#030303;" vertex="1" parent="20">
                     <mxGeometry y="146" width="357" height="30" as="geometry"/>
                 </mxCell>
-                <mxCell id="26" value="phone-number(string型、not null、-含めず、minimum10,max11)" style="text;strokeColor=none;fillColor=none;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontSize=12;fontColor=#030202;" vertex="1" parent="20">
+                <mxCell id="26" value="phone_number(string型、not null、-含めず、minimum10,max11)" style="text;strokeColor=none;fillColor=none;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontSize=12;fontColor=#030202;" vertex="1" parent="20">
                     <mxGeometry y="176" width="357" height="30" as="geometry"/>
                 </mxCell>
                 <mxCell id="55" value="※クレジット情報はDBに保存不可" style="text;strokeColor=none;fillColor=none;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontSize=12;labelBackgroundColor=none;labelBorderColor=none;fontColor=#030202;" vertex="1" parent="20">
