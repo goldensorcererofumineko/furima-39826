@@ -14,6 +14,25 @@ RSpec.describe User, type: :model do
         @user.password_confirmation = '123qwe'
         expect(@user).to be_valid
       end
+
+      it '英字のみのパスワードでは登録できない' do
+        @user.password = 'password'
+        expect(@user).not_to be_valid
+        expect(@user.errors[:password]).to include('is invalid.Include both letters and numbers')
+      end
+    
+      it '数字のみのパスワードでは登録できない' do
+        @user.password = '123456'
+        expect(@user).not_to be_valid
+        expect(@user.errors[:password]).to include('is invalid.Include both letters and numbers')
+      end
+    
+      it '全角文字を含むパスワードでは登録できない' do
+        @user.password = 'パスワード123'
+        expect(@user).not_to be_valid
+        expect(@user.errors[:password]).to include('is invalid.Include both letters and numbers')
+      end
+
       it '名字が全角（漢字・ひらがな・カタカナ）であれば登録できる' do
         @user.last_name = '鈴木'
         expect(@user).to be_valid
@@ -31,7 +50,7 @@ RSpec.describe User, type: :model do
         expect(@user).to be_valid
       end
       it 'emailに@が含まれている場合、有効であること' do
-        @user = User.new(email: 'valid@example.com')
+        @user.email = 'valid@example.com'
         expect(@user).to be_valid
       end
     end
@@ -42,6 +61,18 @@ RSpec.describe User, type: :model do
         @user.nickname = ''
         @user.valid?
         expect(@user.errors.full_messages).to include("Nickname can't be blank")
+      end
+
+      it 'メールアドレスが空では登録できない' do
+        @user.email = ''
+        expect(@user).not_to be_valid
+        expect(@user.errors[:email]).to include("can't be blank")
+      end
+    
+      it 'メールアドレスに@を含まない場合は登録できない' do
+        @user.email = 'invalid-email.com'
+        expect(@user).not_to be_valid
+        expect(@user.errors[:email]).to include('is invalid')
       end
 
       it 'メールアドレスがすでに登録しているユーザーと重複していると保存できない' do
@@ -71,7 +102,7 @@ RSpec.describe User, type: :model do
       end
       it 'パスワード（確認）が空欄だと保存できない' do
         @user.password = '123qwe'
-        @user.password_confirmation = '123qw'
+        @user.password_confirmation = ''
         @user.valid?
         expect(@user.errors.full_messages).to include("Password confirmation doesn't match Password")
       end
