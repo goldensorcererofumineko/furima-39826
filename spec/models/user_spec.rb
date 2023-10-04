@@ -15,24 +15,6 @@ RSpec.describe User, type: :model do
         expect(@user).to be_valid
       end
 
-      it '英字のみのパスワードでは登録できない' do
-        @user.password = 'password'
-        expect(@user).not_to be_valid
-        expect(@user.errors[:password]).to include('is invalid.Include both letters and numbers')
-      end
-    
-      it '数字のみのパスワードでは登録できない' do
-        @user.password = '123456'
-        expect(@user).not_to be_valid
-        expect(@user.errors[:password]).to include('is invalid.Include both letters and numbers')
-      end
-    
-      it '全角文字を含むパスワードでは登録できない' do
-        @user.password = 'パスワード123'
-        expect(@user).not_to be_valid
-        expect(@user.errors[:password]).to include('is invalid.Include both letters and numbers')
-      end
-
       it '名字が全角（漢字・ひらがな・カタカナ）であれば登録できる' do
         @user.last_name = '鈴木'
         expect(@user).to be_valid
@@ -55,7 +37,7 @@ RSpec.describe User, type: :model do
       end
     end
 
-    context '新規登録がうまくかないとき' do
+    context '新規登録がうまくいかないとき' do
 
       it 'ニックネームが空欄だと保存できない' do
         @user.nickname = ''
@@ -65,13 +47,13 @@ RSpec.describe User, type: :model do
 
       it 'メールアドレスが空では登録できない' do
         @user.email = ''
-        expect(@user).not_to be_valid
-        expect(@user.errors[:email]).to include("can't be blank")
+        @user.valid?
+        expect(@user.errors.full_messages).to include("Email can't be blank")
       end
     
       it 'メールアドレスに@を含まない場合は登録できない' do
-        @user.email = 'invalid-email.com'
-        expect(@user).not_to be_valid
+        @user = User.new(email: 'invalid-email.com')  
+        @user.valid?  
         expect(@user.errors[:email]).to include('is invalid')
       end
 
@@ -80,7 +62,6 @@ RSpec.describe User, type: :model do
         another_user = FactoryBot.build(:user)
         another_user.email = @user.email
         another_user.valid?
-        # binding.pry
         expect(another_user.errors.full_messages).to include('Email has already been taken')
       end
       it 'パスワードが空欄だと保存できない' do
@@ -100,6 +81,25 @@ RSpec.describe User, type: :model do
         @user.valid?
         expect(@user.errors.full_messages).to include('Password is invalid.Include both letters and numbers')
       end
+
+      it '英字のみのパスワードでは登録できない' do
+        @user.password = 'password'
+        expect(@user).not_to be_valid
+        expect(@user.errors[:password]).to include('is invalid.Include both letters and numbers')
+      end
+    
+      it '数字のみのパスワードでは登録できない' do
+        @user.password = '123456'
+        expect(@user).not_to be_valid
+        expect(@user.errors[:password]).to include('is invalid.Include both letters and numbers')
+      end
+    
+      it '全角文字を含むパスワードでは登録できない' do
+        @user.password = 'パスワード123'
+        expect(@user).not_to be_valid
+        expect(@user.errors[:password]).to include('is invalid.Include both letters and numbers')
+      end
+
       it 'パスワード（確認）が空欄だと保存できない' do
         @user.password = '123qwe'
         @user.password_confirmation = ''
