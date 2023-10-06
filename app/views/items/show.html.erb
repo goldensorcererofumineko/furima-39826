@@ -19,7 +19,7 @@
         <%= "￥ #{@item.item_price}"%>
       </span>
       <span class="item-postage">
-        <%= "配送料負担" %>
+        <%= @item.item_shipping_fee_status.name %>
       </span>
     </div>
 
@@ -36,7 +36,7 @@
     <% end %>
 
     <div class="item-explain-box">
-      <span><%= "商品説明" %></span>
+      <span><%= @item.item_info %></span>
     </div>
     <table class="detail-table">
       <tbody>
