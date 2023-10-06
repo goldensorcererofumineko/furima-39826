@@ -2,9 +2,10 @@ require 'rails_helper'
 
 RSpec.describe Item, type: :model do
   before do
-    @user = FactoryBot.create(:user)
-    @item = FactoryBot.build(:item, user: @user)
+    @item = FactoryBot.build(:item)
   end
+  
+ 
 
   describe '新規商品出品' do
     context '新規出品がうまくいくとき' do
@@ -79,6 +80,13 @@ RSpec.describe Item, type: :model do
         @item.valid?
         expect(@item.errors.full_messages).to include("Item scheduled delivery can't be blank")
       end
+
+      it 'prefecture_idが1の場合、保存できない' do
+        @item.prefecture_id = 1
+        @item.valid?
+        expect(@item.errors.full_messages).to include("Prefecture can't be blank")
+      end
+
       it 'userが紐付いていないと保存できない' do
         @item.user = nil
         @item.valid?
