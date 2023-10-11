@@ -101,6 +101,11 @@ RSpec.describe OrderForm, type: :model do
         @order_form.valid?
         expect(@order_form.errors.full_messages).to include("Token can't be blank")
       end
+      it 'itemが紐付いていないと保存できないこと' do
+        @order_form.item_id = nil
+        @order_form.valid?
+        expect(@order_form.errors.full_messages).to include("Item can't be blank")
+      end
       it 'userが紐付いていないと保存できないこと' do
         @order_form.user_id = nil
         @order_form.valid?
