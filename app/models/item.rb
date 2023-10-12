@@ -7,6 +7,7 @@ class Item < ApplicationRecord
   belongs_to :prefecture
   has_one_attached :image
   belongs_to :user
+  has_one    :order
 
   validates :item_info, presence: true
   validates :item_price, presence: true
@@ -14,7 +15,6 @@ class Item < ApplicationRecord
   validates :image, presence: true
   validates :item_price, presence: true,
   numericality: { only_integer: true, greater_than_or_equal_to: 300, less_than_or_equal_to: 9_999_999 }
-
 
   validates :item_category_id, numericality: { other_than: 1 , message: "can't be blank"} 
   validates :item_sales_status_id, numericality: { other_than: 1 , message: "can't be blank"} 
